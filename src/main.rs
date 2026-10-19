@@ -303,11 +303,21 @@ impl CubeServer {
     }
 
     pub fn get_cube(&self, name: &str) -> Option<&Cube> {
-        self.cubes.get(name)
+        let normalized = if name.eq_ignore_ascii_case("CUBE_RETROGAMING_SHOP") {
+            "RetroGamingShop"
+        } else {
+            name
+        };
+        self.cubes.get(normalized)
     }
 
     pub fn get_cube_mut(&mut self, name: &str) -> Option<&mut Cube> {
-        self.cubes.get_mut(name)
+        let normalized = if name.eq_ignore_ascii_case("CUBE_RETROGAMING_SHOP") {
+            "RetroGamingShop"
+        } else {
+            name
+        };
+        self.cubes.get_mut(normalized)
     }
 
     /// Écrit une transaction dans le journal WAL (disque)
