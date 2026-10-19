@@ -9,14 +9,14 @@ COPY frontend/ ./
 RUN npm run build
 
 # 2. Build du backend Rust
-FROM rust:1.80-bullseye AS backend-builder
+FROM rust:1.80-bookworm AS backend-builder
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src/ ./src/
 RUN cargo build --release
 
 # 3. Image finale d'exécution légère
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
