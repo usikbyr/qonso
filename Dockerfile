@@ -9,7 +9,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # 2. Build du backend Rust
-FROM rust:1.80-bookworm AS backend-builder
+FROM rust:bookworm AS backend-builder
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src/ ./src/
